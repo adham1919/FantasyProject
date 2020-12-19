@@ -6,35 +6,31 @@ import java.io.IOException;
 import java.util.Scanner;
 //COMMENT TO CHECK
 public class Logger {
-public void register() throws IOException
+public void register(UserAccount ua) throws IOException
 {   
-	Scanner scan=new Scanner(System.in);
 	String temp;
 	AccountInfoIO account= new AccountInfoIO();
-	System.out.println("please enter email");
-	temp= scan.nextLine();
-	File newfolder= new File("C:\\Users\\theda\\Documents\\FantasyDataBase\\"+temp);
+	String location="FantasyDatabase\\"+ua.getMail();
+	File newfolder= new File(location);
 	newfolder.mkdir();
-	String location="C:\\Users\\theda\\Documents\\FantasyDataBase\\"+temp;
-	File personalInfo= new File("C:\\Users\\theda\\Documents\\FantasyDataBase\\"+temp+"\\personalInfo.txt");
+	File personalInfo= new File(location+"\\personalInfo.txt");
 	personalInfo.createNewFile();
-	System.out.println("please enter name");
-	temp= scan.nextLine();
+	temp= ua.getName();
 	account.writeName(temp,location);
-	System.out.println("please enter password");
-	temp= scan.nextLine();
+	temp= ua.getPass();
 	account.writePassword(temp,location);
-	System.out.println("please enter Favourite team");
-	temp= scan.nextLine();
+	temp= ua.getTeam();
 	account.writeTeam(temp,location);
 	
 }
 
-public UserAccount login(String mail,String password) throws FileNotFoundException
+public UserAccount login(UserAccount us) throws FileNotFoundException
 {
 	UserAccount temp=null;
 	AccountInfoIO accountinfo= new AccountInfoIO();
-	File account= new File("C:\\Users\\theda\\Documents\\FantasyDataBase\\"+mail);
+	String mail=us.getMail();
+	String password = us.getPass();
+	File account= new File("FantasyDataBase\\"+mail);
 	if(account.exists())
 	{
 		if(password.equals(accountinfo.readPassword(account.toString())))
