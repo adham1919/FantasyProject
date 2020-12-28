@@ -6,7 +6,7 @@ public class Menu {
 public Menu() throws IOException
 {
         loginMenu();
-		System.out.println("THANK U ");
+		
 	}
 	
 
@@ -44,6 +44,10 @@ public void loginMenu() throws IOException
 			if(mc.callLogin())
 			mainMenu();
 			break;
+		case -1:
+			System.out.println("THANK U ");
+			break;
+		default : System.out.println("option unavailable "); 
 		}
 	}
 	
@@ -51,18 +55,39 @@ public void loginMenu() throws IOException
     }
 
 
-public void mainMenu()
+public void mainMenu() throws IOException
 {   Scanner scanner = new Scanner(System.in);
     String n="7";
    
     while(Integer.parseInt(n)!=-1)
     {
-    	System.out.println("--------MAIN MENU---------");
-	System.out.println("write -1 to log out");
-	System.out.println("more content coming soon ....");
-	 n=scanner.next();
-    }
+    System.out.println("--------MAIN MENU---------");
+    System.out.println("write 1 to add player to the system");
+    System.out.println("write 2 to remove player from the system");
+    System.out.println("write 3 to add player to the squad");
+    System.out.println("write -1 to log out");
+     mc.updateList();
+	n=scanner.next();
+	int c=Integer.parseInt(n);
+	switch(c)
+	{
+	case 1:
+		mc.addPlayerToSys();
+		break;
+		
+	case 2:
+        mc.reomvePlayerFromSys();
+		break;
+	case 3:
+		 mc.addPlayerToSqd();
+	     break;
+	case -1:
+		
+	default : System.out.println("option unavailable "); 
+	}
 }
+    }
+
 public static void main(String arg[]) throws IOException
 {
 	Menu m= new  Menu();

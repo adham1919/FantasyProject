@@ -5,6 +5,11 @@ public class UserAccount {
 	private String pass;
 	private String favTeam;
 	private String mail;
+	private Squad sq;
+	private int wallet;
+	public UserAccount() {
+		sq = new Squad();
+	}
     public void setName(String s)
     {
     	name=s;
@@ -42,5 +47,18 @@ public class UserAccount {
     {
     	return favTeam;
     }
-
+    public Squad getSquad()
+    {
+    	return sq;
+    }
+    
+     public int getWallet()
+    {
+    	return wallet;
+    }
+    
+     public void setWallet(int n)
+    {
+    	 wallet=n;
+    }
 }
