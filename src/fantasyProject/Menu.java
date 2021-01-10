@@ -74,6 +74,7 @@ public void mainMenu() throws IOException
 	case 1:
 		 mc.addPlayerToSqd();
 		break;
+	
 
 	case -1:
 		break;
@@ -104,10 +105,10 @@ public void adminMenu() throws IOException
 		mc.editSysPlayers();
 		break;
 		
-	case 2:
+	case 2:mc.createGameW();
         
 		break;
-	case 3:
+	case 3:mc.editSysMatch();
         
 		break;
 	case 4:

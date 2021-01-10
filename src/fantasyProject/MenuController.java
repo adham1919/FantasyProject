@@ -11,6 +11,7 @@ public class MenuController {
    private Admin admin;
    private GameWeek currGameWeek;
    private ArrayList<Player> playerList;
+   private Match currmat;
    
    
    public MenuController() {
@@ -68,6 +69,19 @@ public class MenuController {
 	   else if(c==1) admin.addPlayerToSys();
 	   else System.out.println("wrong input");
    }
+   public void editSysMatch() throws IOException
+   {  
+	   EventFileHandler p2=new EventFileHandler();
+	   
+	   System.out.print("enter week number ");
+	   Scanner sc=new Scanner(System.in);
+	   int c=sc.nextInt();
+	   currmat=admin.createMatch();
+	   PlayerFileHandler p3 = new PlayerFileHandler();
+	   p3.update(currmat);
+	  p2.SaveMatch(currmat, c); ;
+   		
+   }
    public int callLogin() throws FileNotFoundException 
    {
 	   System.out.println("ha");
@@ -100,6 +114,9 @@ public class MenuController {
 		   return 1;
 	   }
 
+   }
+   public void createGameW() throws IOException{
+	   admin.createGW();
    }
    
 	 public void addPlayerToSqd() throws IOException
