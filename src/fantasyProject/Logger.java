@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import PlayerPackage.Player;
 //COMMENT TO CHECK
@@ -39,7 +40,7 @@ public UserAccount login(UserAccount us) throws FileNotFoundException
 	File account= new File("FantasyDataBase\\Users\\"+mail);
 	if(account.exists())
 	{
-		if(password.equals(accountinfo.readPassword(account.toString())))
+		if(password.equals(accountinfo.readPassword(account.toString())) )
 		{   String val;
 			temp = new UserAccount();
 			temp.setMail(mail);
@@ -50,7 +51,33 @@ public UserAccount login(UserAccount us) throws FileNotFoundException
 		}
 	}
 	return temp;
+
 }
+
+/*public ArrayList<UserAccount> LoadAll() throws FileNotFoundException
+{
+	UserAccount temp=null;
+	AccountFileHandler accountinfo= new AccountFileHandler();
+	String mail=us.getMail();
+	String password = us.getPass();
+	File account= new File("FantasyDataBase\\Users\\"+mail);
+	if(account.exists())
+	{
+		if(password.equals(accountinfo.readPassword(account.toString())) )
+		{   String val;
+			temp = new UserAccount();
+			temp.setMail(mail);
+			temp.setPass(password);
+			temp.setTeam(accountinfo.readTeam(account.toString()));
+			temp.setName(accountinfo.readName(account.toString()));
+			temp.setWallet(accountinfo.readWallet(account.toString()));
+		}
+	}
+	return temp;
+
+}*/
+
+
 
 
 public UserAccount logout(UserAccount us)

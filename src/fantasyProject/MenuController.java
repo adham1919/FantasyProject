@@ -8,16 +8,20 @@ import PlayerPackage.Player;
 import PlayerPackage.Position;
 public class MenuController {
    private UserAccount account;
+   private Admin admin;
+   private GameWeek currGameWeek;
    private ArrayList<Player> playerList;
    
    
    public MenuController() {
 	   account=new UserAccount();
-	  playerList = new ArrayList<Player>();
+	   admin= new Admin();
+	   
+	   playerList = new ArrayList<Player>();
 }
    public void updateList() throws FileNotFoundException
    {
-	   PlayerFileHandler pf = new PlayerFileHandler();
+	    PlayerFileHandler pf = new PlayerFileHandler();
 		String location="fantasyDatabase\\Players\\";
 		File f=new File(location);
 		File[] players = f.listFiles();
@@ -56,66 +60,44 @@ public class MenuController {
 		account=l.register(tmpAccount);
    }
    
-   public void addPlayerToSys() throws IOException {
-	   Player p=new Player();
-	   PlayerFileHandler p2 = new PlayerFileHandler();
-	   Scanner input=new Scanner(System.in);
-	   String pname = "" , pclub="" , pnation="",s;
-	   System.out.println("Enter the player name");
-	   pname=input.nextLine();
-	   p.setName(pname);
-	   System.out.println("Enter the player club");
-	   pclub=input.nextLine();
-	   p.setClub(pclub);
-	   System.out.println("Enter the player nation");
-	   pnation=input.nextLine();
-	   p.setNation(pnation);
-	   System.out.println("Enter the player postion");
-	   s=input.nextLine();
-	   p.setPostion(s);
-	   System.out.println("Enter the player id");
-	   int n=input.nextInt();
-	   p.setID(n);
-	   System.out.println("Enter the player price");
-	  n=input.nextInt();
-	   p.setPrice(n);
-	   p2.addToSys(p);
-	   
-	   
+   public void editSysPlayers() throws IOException
+   {   Scanner sc=new Scanner(System.in);
+	   System.out.println("to remove player from system enter 0\nto add player to system enter 1");
+	   int c=sc.nextInt();
+	   if (c==0) admin.reomvePlayerFromSys();
+	   else if(c==1) admin.addPlayerToSys();
+	   else System.out.println("wrong input");
    }
-   public void reomvePlayerFromSys() throws IOException {
-	   Player p=new Player();
-	   PlayerFileHandler p2 = new PlayerFileHandler();
-	   Scanner input=new Scanner(System.in);
-	   System.out.println("Enter the player id");
-	   int n=input.nextInt();
-	   p.setID(n);
-	   p2.removeFromSys(p);
-	   
-	   
-   }
-   public boolean callLogin() throws FileNotFoundException 
+   public int callLogin() throws FileNotFoundException 
    {
-	   Logger l= new Logger();
+	   System.out.println("ha");
 	   Scanner scanner=new Scanner(System.in);
 	   UserAccount tmpAccount=new UserAccount();
 	   System.out.print("please enter mail : ");
 		String mail=scanner.next();
 		System.out.print("please enter password : ");
 		String pass=scanner.next();
+		if(mail.equals(admin.getName()) && pass.equals(admin.getPass()))
+			{
+			 System.out.println("logged in as admin------->");
+			 return 2;
+			}
+		
 		tmpAccount.setMail(mail);
 		tmpAccount.setPass(pass); 
-	   account=l.login(tmpAccount);
+		Logger l= new Logger();
+	    account=l.login(tmpAccount);
+	   
 	   if(account==null)   
 	   {
-		   System.out.println("Error wrong mail or password");
-		   return false;
+		   System.out.println("X Error wrong mail or password X");
+		   return 0;
 	   }
 	   else
 	   {
-		   System.out.println("login successful");
+		   System.out.println("login successful--------->");
 		   
-		   return true;
+		   return 1;
 	   }
 
    }
@@ -131,9 +113,7 @@ public class MenuController {
          if(playerList.size()<15) {System.out.println("error not enough players created"); return; }
          int count=0;
          String error="error insertion failed please check ur wallet or the player postion";
-   
          int n;
- 
          System.out.println("insert 2 keepers");
          while(count!=2)
          {

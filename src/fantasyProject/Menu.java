@@ -40,9 +40,11 @@ public void loginMenu() throws IOException
 			break;
 			
 		case 2:
-
-			if(mc.callLogin())
+            int x=mc.callLogin();
+			if(x==1)
 			mainMenu();
+			else if(x==2)
+			adminMenu(); 
 			break;
 		case -1:
 			System.out.println("THANK U ");
@@ -62,9 +64,7 @@ public void mainMenu() throws IOException
     while(Integer.parseInt(n)!=-1)
     {
     System.out.println("--------MAIN MENU---------");
-    System.out.println("write 1 to add player to the system");
-    System.out.println("write 2 to remove player from the system");
-    System.out.println("write 3 to add player to the squad");
+    System.out.println("write 1 to add player to the squad");
     System.out.println("write -1 to log out");
      mc.updateList();
 	n=scanner.next();
@@ -72,17 +72,49 @@ public void mainMenu() throws IOException
 	switch(c)
 	{
 	case 1:
-		mc.addPlayerToSys();
+		 mc.addPlayerToSqd();
+		break;
+
+	case -1:
+		break;
+	default : System.out.println("option unavailable "); 
+	}
+}
+    }
+
+
+
+public void adminMenu() throws IOException
+{   Scanner scanner = new Scanner(System.in);
+    String n="7";
+   
+    while(Integer.parseInt(n)!=-1)
+    {
+    System.out.println("--------ADMIN MENU---------");
+    System.out.println("write 1 edit players in the system");
+    System.out.println("write 2 start game week");
+    System.out.println("write 3 add matches");
+    System.out.println("write -1 to log out");
+     mc.updateList();
+	n=scanner.next();
+	int c=Integer.parseInt(n);
+	switch(c)
+	{
+	case 1:
+		mc.editSysPlayers();
 		break;
 		
 	case 2:
-        mc.reomvePlayerFromSys();
+        
 		break;
 	case 3:
-		 mc.addPlayerToSqd();
-	     break;
+        
+		break;
+	case 4:
+        
+		break;
 	case -1:
-		
+		break;
 	default : System.out.println("option unavailable "); 
 	}
 }
