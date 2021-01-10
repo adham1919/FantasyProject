@@ -79,6 +79,7 @@ public class Admin   {
     		System.out.println("5 add penalty save");
     		System.out.println("6 add yellow card taker");
     		System.out.println("7 add red card taker");
+    		System.out.println("-1 to exit");
     		System.out.println("enter option then the player id");
     		 n=input.nextInt();
     		 n2=input.nextInt();
@@ -109,10 +110,20 @@ public class Admin   {
     		}
   
     	}
+    	
+    	
     	return newMatch;
     }
     
-    
+    public void createGW() throws IOException
+    {
+    	EventFileHandler p2=new EventFileHandler();
+    	Scanner input=new Scanner(System.in);
+    	int n;
+    	n=input.nextInt();
+    	p2.createGameWeek(n);
+    	
+    }
     
 
 }

@@ -14,6 +14,7 @@ public class EventFileHandler {
    		String line;
    		line="";
    		stream.write((m.getTeam1()+"VS"+m.getTeam1()).getBytes());
+   		stream.write((line+"\n").getBytes());
    		stream.write(("goal scorer id ").getBytes());
    		for(int i=0;i< m.getGoalScorer().size();i++)
    		{
@@ -61,7 +62,7 @@ public class EventFileHandler {
    		stream.write((line+"\n").getBytes());
            stream.close();
        }
-       
+      
        public void createGameWeek(int weekNum) throws IOException
        {
    		String location="fantasyDatabase\\GameWeeks\\week"+weekNum;
